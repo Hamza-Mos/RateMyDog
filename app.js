@@ -4,21 +4,6 @@ const axios = require('axios');
 const fs = require("fs");
 
 let url = "https://dog.ceo/api/breeds/image/random";
-let breed = "";
-
-/*
-ISSUES:
-
-- req params for filter by breed does not work half the time
-- /rate route keeps breaking... why??
-- how can i access input rating field?
-
-*/
-
-function setBreed(breedName)
-{
-  breed = breedName;
-}
 
 async function getImage()
 {
@@ -88,11 +73,6 @@ app.get("/history", function(req, res) {
 
 app.get("/breed/:breedName", function(req, res){
   let breedName = req.params['breedName'];
-
-  while(breedName.charAt(0).toLowerCase() == breedName.charAt(0).toUpperCase())
-  {
-    breedName = breedName.substring(1);
-  }
 
   url = "https://dog.ceo/api/breed/" + breedName + "/images/random";
 
