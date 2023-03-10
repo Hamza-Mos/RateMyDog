@@ -1,3 +1,5 @@
+/****** Drop Down Search Bar ******/
+
 /* Dropdown Button */
 .dropbtn {
     background-color: #04AA6D;
@@ -55,18 +57,25 @@
   /* Change color of dropdown links on hover */
   .dropdown-content a:hover {background-color: #f1f1f1}
   
-  /* Show the dropdown menu (use JS to add this class to the .dropdown-content container when the user clicks on the dropdown button) */
+  /* Show the dropdown menu  */
   .show {display:block;}
 
-  *{
+/****** Star Rating System ******/
+
+/* All elements */
+*{
     margin: 0;
     padding: 0;
 }
+
+/* Rating div */
 .rate {
     float: left;
     height: 46px;
     padding: 0 10px;
 }
+
+
 .rate:not(:checked) > input {
     position:absolute;
     top:-9999px;

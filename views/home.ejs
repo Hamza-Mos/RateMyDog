@@ -3,11 +3,13 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rate My Dog!</title>
+    <title>RateMyDog</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
+
+    <!-- Navigation bar: -->
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand" href="/">RateMyDog</a>
@@ -30,9 +32,9 @@
       </div>
     </nav>
 
-    <!-- <form id="breedForm"> -->
+    <!-- Drop down search bar to filter images by breed -->
     <div class="dropdown">
-      <button onclick="myFunction()" class="dropbtn">Dropdown</button>
+      <button onclick="myFunction()" class="dropbtn">Pick a Breed:</button>
       <div id="myDropdown" class="dropdown-content">
         <input type="text" placeholder="Search.." id="myInput" name="search" value="" onkeyup="filterFunction()">
     <%  breeds.forEach((breed) => {%>
@@ -44,22 +46,18 @@
       </div>
     </div>
 
-
-    <form id="breedForm" action="/" method="post"></form> 
-
-      
-
-      <button type="button" class="btn btn-outline-secondary" onclick="setRandom()" name="random" value="random">Or Pick Random a Breed</button> 
-    </form>
-    <!-- </div> -->
+    <!-- Get a random image for random breed -->
+    <a class="btn btn-outline-secondary" href="/random" role="button">Or Pick Random a Breed</a> 
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
     <script type="text/javascript">
 
+      // Toggles drop down search bar once clicked
       function myFunction() {
         document.getElementById("myDropdown").classList.toggle("show");
       }
 
+      // Filters search based on user input in search bar
       function filterFunction() {
         var input, filter, ul, li, a, i;
         input = document.getElementById("myInput");
@@ -76,42 +74,6 @@
         }
       }
 
-      function breedClicked()
-      {
-        console.log("\nyessir\n");
-
-        // const search = document.getElementById("myInput");
-        // search.value = evt.target.value;
-
-        // alert(search.value);
-
-        // const breedForm = document.getElementById("breedForm");
-        // breedForm.submit();
-
-      }
-
-
-
-        function setBreed()
-        {
-            // console.log
-            const select = document.getElementById("breed");
-            const option = select.options[selectElement.selectedIndex].value;
-
-            const button = document.getElementById("breedButton");
-            button.value = option;
-            
-            const breedForm = document.getElementById("breedForm");
-            breedForm.action = "/random";
-            breedForm.submit();
-        }
-
-        function setRandom()
-        {
-            const breedForm = document.getElementById("breedForm");
-            breedForm.action = "/random";
-            breedForm.submit();
-        }
     </script>
   </body>
 </html>

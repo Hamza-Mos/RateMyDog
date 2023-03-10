@@ -1,13 +1,14 @@
-let ratingsArray = [];
 
+// user ratings array and current rating
+let ratingsArray = [];
 let rating = 0;
 
+// Used by html input elements to submit form once clicked
 function submitForm(form, userRating) {
 
     rating = userRating;
 
     //get the form element's document to create the input control with
-    //(this way will work across windows in IE8)
     var button = form.ownerDocument.createElement('input');
 
     //make sure it can't be seen/disrupts layout (even momentarily)
@@ -23,25 +24,28 @@ function submitForm(form, userRating) {
     form.removeChild(button);
 }
 
-
+// function used for client side caching using localStorage
 function cacheForm()
 {
+    // Create new entry for localStorage and ratingsArray
     const img =  document.getElementById("dogImg").src;
-
     const entry = {rate: rating, imgURL: img};
 
+    // Local storage is empty
     if(!("ratings" in localStorage))
     {
         ratingsArray.push(entry);
         localStorage.setItem("ratings", JSON.stringify(ratingsArray));
     }
 
+    // Local storage is not empty
     else
     {
-
+        // push new entry on top of current entries in localStorage
         ratingsArray = JSON.parse(localStorage.getItem("ratings"));
         ratingsArray.push(entry);
 
+        // sort array by ratings (highest to lowest)
         ratingsArray.sort((a,b) => {
             if(a.rate > b.rate)
             {
@@ -58,9 +62,10 @@ function cacheForm()
                 return 0;
             }
 
-            // or prolly could also do (b - a)
+            // or probably could also do (b - a)
         });
 
+        // save array in local storage
         localStorage.setItem("ratings", JSON.stringify(ratingsArray));
     }
 }
