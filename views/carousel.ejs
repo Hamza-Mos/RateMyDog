@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rate My Dog!</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="history.js"></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="/">RateMyDog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link" aria-current="page" href="/">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/rate">Rate</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="/history">History</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="carouselExampleDark" class="carousel carousel-dark slide">
+        <div class="carousel-indicators">
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div id="history" class="carousel-inner">
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="prev">
+          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleDark" data-bs-slide="next">
+          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+          <span class="visually-hidden">Next</span>
+        </button>
+      </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <script>
+      
+      if(!("ratings" in localStorage))
+      {
+        document.getElementById("history").innerHTML = "<h1>Nothing has been entered</h1>";
+      }
+
+      else
+      {
+        const ratingsArray = JSON.parse(localStorage.getItem("ratings"));
+
+        var htmlStuff = "";
+
+        for(var i = 0; i < ratingsArray.length; i++)
+        {
+            htmlStuff+= "<div class=\"carousel-item\">";
+            htmlStuff+= "<img src=\"" + ratingsArray[i].imgURL + "\" class=\"d-block w-100\" alt=\"...\"style=\"width:100px;height:100px;\">";
+            htmlStuff+= "<div class=\"carousel-caption d-none d-md-block\">";
+            htmlStuff+= "<h5>" + "Rating: " + ratingsArray[i].rate + "</h5>";
+            htmlStuff+= "</div></div>";
+        }
+
+        // htmlStuff+="</ul>";
+
+        document.getElementById("history").innerHTML = htmlStuff;
+
+      }
+
+      // for (var i = 1; i <= 55; i++) {
+      //     strLinks += '<a href="'+ i +'.html"><img src="images/'+ i +'.jpg" width="119" height="121" alt="" /></a>';
+      // }
+
+      // document.getElementById("links").innerHTML = strLinks;
+    </script>
+  </body>
+</html>
