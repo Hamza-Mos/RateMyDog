@@ -34,30 +34,10 @@ async function getImage()
       
 }
 
-function getLines(filename)
-{
-  return fs.readFile(filename, "utf-8", function(err, data){
-    if(err) {
-        throw err;
-    }
-
-    // note: this assumes `data` is a string - you may need
-    //       to coerce it - see the comments for an approach
-    data+="";
-    var lines = data.split('\n');
-
-    console.log("success!");
-
-    // console.log(lines);
-    
-    return "helloworld";
- })
-}
-
-function getLines2()
+function getLines()
 {
   var array = fs.readFileSync('breeds.txt').toString().split("\n");
-  // console.log(array);
+
   return array;
 }
 
@@ -69,10 +49,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(express.static("public"));
 
 app.get("/rate", (req, res) => {
-    console.log("entered URL: " + url);
     let image = getImage();
     image.then(result => {
-        console.log(result.message);
         res.render("rate", {imgURL: result.message});
     })
     
@@ -80,7 +58,7 @@ app.get("/rate", (req, res) => {
 
 app.get("/", function (req, res){
 
-  var dogBreeds = getLines2();
+  var dogBreeds = getLines();
 
   res.render("home", {breeds: dogBreeds});
 })
@@ -88,30 +66,19 @@ app.get("/", function (req, res){
 app.post("/random", function(req, res){
   url = "https://dog.ceo/api/breeds/image/random";
 
-  console.log("url: ", url);
-
   res.redirect("/rate");
 })
 
 // change this to update url
 app.post("/rate", function(req, res){
-
-  const rating = req.body.rating;
-  const dog = req.body.dog;
-
-  console.log("Rating: " + rating + "\t image: " + dog)
   res.redirect("/rate");
 });
 
 app.post("/", function(req, res){
 
-  console.log("here!!");
-
   const breed = req.body.breedButton;
 
   url = "https://dog.ceo/api/breed/" + breed + "/images/random";
-
-  console.log(url);
   res.redirect("/rate");
 });
 
@@ -121,8 +88,6 @@ app.get("/history", function(req, res) {
 
 app.get("/breed/:breedName", function(req, res){
   let breedName = req.params['breedName'];
-
-  console.log(breedName);
 
   while(breedName.charAt(0).toLowerCase() == breedName.charAt(0).toUpperCase())
   {

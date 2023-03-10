@@ -1,19 +1,32 @@
 let ratingsArray = [];
-let entry = {rating: 5, imgURL: "URL"};
-// ratingsArray.push(entry);
 
-// console.log("we here");
+let rating = 0;
 
-// JSON.stringify(ratingsArray);
-// console.log(ratingsArray);
+function submitForm(form, userRating) {
 
-const ratingInput = document.getElementById("rating");
+    rating = userRating;
+
+    //get the form element's document to create the input control with
+    //(this way will work across windows in IE8)
+    var button = form.ownerDocument.createElement('input');
+
+    //make sure it can't be seen/disrupts layout (even momentarily)
+    button.style.display = 'none';
+
+    //make it such that it will invoke submit if clicked
+    button.type = 'submit';
+
+    //append it and click it
+    form.appendChild(button).click();
+
+    //if it was prevented, make sure we don't get a build up of buttons
+    form.removeChild(button);
+}
+
 
 function cacheForm()
 {
-    localStorage.clear();
-    const img =  document.getElementById("rateButton").value;
-    const rating = ratingInput.value;
+    const img =  document.getElementById("dogImg").src;
 
     const entry = {rate: rating, imgURL: img};
 
@@ -21,13 +34,10 @@ function cacheForm()
     {
         ratingsArray.push(entry);
         localStorage.setItem("ratings", JSON.stringify(ratingsArray));
-
-        console.log("yessir");
     }
 
     else
     {
-        console.log("first timer");
 
         ratingsArray = JSON.parse(localStorage.getItem("ratings"));
         ratingsArray.push(entry);
